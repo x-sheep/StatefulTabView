@@ -14,15 +14,18 @@ public struct Tab {
     internal var prefersLargeTitle: Bool = false
     
     let badgeValue: String?
+    let onRepeatPress: (() -> Void)?
     
     // MARK: Asset Image Names
     public init<T>(title: String? = nil,
                    imageName: String,
                    selectedImageName: String? = nil,
                    badgeValue: String? = nil,
+                   onRepeatPress: (() -> Void)? = nil,
                    @ViewBuilder content: @escaping () -> T) where T: View {
         
         self.badgeValue = badgeValue
+        self.onRepeatPress = onRepeatPress
         
         var selectedImage: UIImage?
         if let selectedImageName = selectedImageName {
@@ -39,9 +42,11 @@ public struct Tab {
                    systemImageName: String,
                    selectedSystemImageName: String? = nil,
                    badgeValue: String? = nil,
+                   onRepeatPress: (() -> Void)? = nil,
                    @ViewBuilder content: @escaping () -> T) where T: View {
         
         self.badgeValue = badgeValue
+        self.onRepeatPress = onRepeatPress
         
         var selectedImage: UIImage?
         
@@ -59,9 +64,11 @@ public struct Tab {
                    image: UIImage?,
                    selectedImage: UIImage? = nil,
                    badgeValue: String? = nil,
+                   onRepeatPress: (() -> Void)? = nil,
                    @ViewBuilder content: @escaping () -> T) where T: View {
         
         self.badgeValue = badgeValue
+        self.onRepeatPress = onRepeatPress
         
         barItem = UITabBarItem(title: title, image: image, selectedImage: selectedImage)
         

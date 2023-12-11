@@ -10,11 +10,15 @@ import SwiftUI
 
 struct ContentView: View {
     @State var selectedIndex: Int = 1
-    @State var badgeValue: String? = "1"
+    @State var badgeValue = 1
 
     var body: some View {
         StatefulTabView(selectedIndex: $selectedIndex) {
-            Tab(title: "Tab 1", systemImageName: "circle.fill", badgeValue: badgeValue) {
+            Tab(title: "Tab 1",
+                systemImageName: "circle.fill",
+                badgeValue: "\(badgeValue)",
+                onRepeatPress: { badgeValue += 1 }
+            ) {
                 NavigationView {
                     List {
                         Section {

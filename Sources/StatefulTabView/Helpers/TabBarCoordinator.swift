@@ -23,13 +23,23 @@ class TabBarCoordinator: NSObject, UITabBarControllerDelegate {
 
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         if parent.selectedIndex == tabBarController.selectedIndex {
+            let callback = parent.tabBarItems[parent.selectedIndex].onRepeatPress
+            
             guard let navigationController = navigationController(in: viewController)  else {
-                scrollToTop(in: viewController)
+                if let cb = callback {
+                    cb()
+                } else {
+                    scrollToTop(in: viewController)
+                }
                 return
             }
             
             if navigationController.visibleViewController == navigationController.viewControllers.first {
-                scrollToTop(in: navigationController, selectedIndex: tabBarController.selectedIndex)
+                if let cb = callback {
+                    cb()
+                } else {
+                    scrollToTop(in: navigationController, selectedIndex: tabBarController.selectedIndex)
+                }
             } else {
                 navigationController.popToRootViewController(animated: true)
             }
