@@ -21,7 +21,7 @@ public struct StatefulTabView: View {
 
     private var useBindableIndex: Bool = false
     
-    public init(selectedIndex: Binding<Int>? = nil, @TabBuilder _ content: () -> [Tab]) {
+    public init(selectedIndex: Binding<Int>? = nil, barTintColor: UIColor? = nil, @TabBuilder _ content: () -> [Tab]) {
         if let selectedIndex = selectedIndex {
             _bindableIndex = selectedIndex
             useBindableIndex = true
@@ -29,6 +29,8 @@ public struct StatefulTabView: View {
             _bindableIndex = .constant(0)
             useBindableIndex = false
         }
+        
+        self.barTintColor = barTintColor
 
         configureViewControllers(with: content())
     }
