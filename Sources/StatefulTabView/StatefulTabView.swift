@@ -21,7 +21,13 @@ public struct StatefulTabView: View {
 
     private var useBindableIndex: Bool = false
     
-    public init(selectedIndex: Binding<Int>? = nil, barTintColor: UIColor? = nil, @TabBuilder _ content: () -> [Tab]) {
+    public init(selectedIndex: Binding<Int>? = nil, 
+                barTintColor: UIColor? = nil,
+                unselectedItemTintColor: UIColor? = nil,
+                backgroundColor: UIColor? = nil,
+                tabBarConfiguration: TabBarBackgroundConfiguration? = nil,
+                @TabBuilder _ content: () -> [Tab]
+    ) {
         if let selectedIndex = selectedIndex {
             _bindableIndex = selectedIndex
             useBindableIndex = true
@@ -31,6 +37,9 @@ public struct StatefulTabView: View {
         }
         
         self.barTintColor = barTintColor
+        self.unselectedItemTintColor = unselectedItemTintColor
+        self.backgroundColor = backgroundColor
+        self.tabBarConfiguration = tabBarConfiguration
 
         configureViewControllers(with: content())
     }
